@@ -1,0 +1,56 @@
+<?php use Phalcon\Tag; ?>
+
+<?php echo $this->getContent(); ?>
+
+<table width="100%">
+    <tr>
+        <td align="left">
+            <?php echo $this->tag->linkTo(array("vkresources/index", "Go Back")); ?>
+        </td>
+        <td align="right">
+            <?php echo $this->tag->linkTo(array("vkresources/new", "Create ")); ?>
+        </td>
+    </tr>
+</table>
+
+<table class="browse" align="center">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Vk</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Updated</th>
+         </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($page->items as $vkresource) { ?>
+        <tr>
+            <td><?php echo $vkresource->getId() ?></td>
+            <td><?php echo $vkresource->getName() ?></td>
+            <td><?php echo $vkresource->getVkId() ?></td>
+            <td><?php echo $vkresource->getStatus() ?></td>
+            <td><?php echo $vkresource->getCreatedAt() ?></td>
+            <td><?php echo $vkresource->getUpdatedAt() ?></td>
+            <td><?php echo $this->tag->linkTo(array("vkresources/edit/" . $vkresource->getId(), "Edit")); ?></td>
+            <td><?php echo $this->tag->linkTo(array("vkresources/delete/" . $vkresource->getId(), "Delete")); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+    <tbody>
+        <tr>
+            <td colspan="2" align="right">
+                <table align="center">
+                    <tr>
+                        <td><?php echo $this->tag->linkTo("vkresources/search", "First") ?></td>
+                        <td><?php echo $this->tag->linkTo("vkresources/search?page=" . $page->before, "Previous") ?></td>
+                        <td><?php echo $this->tag->linkTo("vkresources/search?page=" . $page->next, "Next") ?></td>
+                        <td><?php echo $this->tag->linkTo("vkresources/search?page=" . $page->last, "Last") ?></td>
+                        <td><?php echo $page->current, "/", $page->total_pages ?></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
